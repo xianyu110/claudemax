@@ -2,7 +2,7 @@
 
 
 
-在人工智能时代，Claude AI 作为 Anthropic 公司开发的强大语言模型，已成为许多用户日常工作和学习的得力助手。其中，Claude Max 作为其高级版本，提供更强的计算能力和专属节点支持，尤其适合需要高性能 AI 交互的用户。在中国，由于网络环境和访问限制，许多国际 AI 服务难以直接使用，但通过特定平台，用户可以实现无缝接入。本文将详细介绍如何在国内直接使用 Claude Max，并以 claude-opus.top/list 为核心入口，帮助你快速上手。
+在人工智能时代，Claude AI 作为 Anthropic 公司开发的强大语言模型，已成为许多用户日常工作和学习的得力助手。其中，Claude Max 作为其高级版本，提供更强的计算能力和专属节点支持，尤其适合需要高性能 AI 交互的用户。在中国，由于网络环境和访问限制，许多国际 AI 服务难以直接使用，但通过特定平台，用户可以实现无缝接入。本文将详细介绍如何在国内直接使用 Claude Max，并以 [claude-opus.top/list](https://claude-opus.top/list) 为核心入口，帮助你快速上手。
 
 
 
@@ -40,7 +40,7 @@ Claude AI 的界面简洁直观，用户可以通过聊天框输入查询，AI �
 
 
 
-1. **访问平台入口**：打开浏览器，直接输入 https://claude-opus.top/list/#/home（或简称 claude-opus.top/list）。页面会显示模型和节点列表，包括 ClaudeMax 节点组。
+1. **访问平台入口**：打开浏览器，直接输入 [https://claude-opus.top/list/#/home](https://claude-opus.top/list)（或简称 claude-opus.top/list）。页面会显示模型和节点列表，包括 ClaudeMax 节点组。
 
 
 
@@ -88,4 +88,4 @@ Claude AI 的界面简洁直观，用户可以通过聊天框输入查询，AI �
 
 
 
-通过 claude-opus.top/list，你可以轻松融入 AI 浪潮。立即行动，体验 Claude Max 的强大功能！如果有疑问，可在平台内咨询。
+通过 [claude-opus.top/list](https://claude-opus.top/list)，你可以轻松融入 AI 浪潮。立即行动，体验 Claude Max 的强大功能！如果有疑问，可在平台内咨询。
