@@ -15,6 +15,8 @@ const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
 hamburger.addEventListener('click', function() {
+    const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+    hamburger.setAttribute('aria-expanded', !isExpanded);
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
 });
@@ -145,12 +147,14 @@ function typeWriter(element, text, speed = 100) {
     type();
 }
 
-// 页面加载时的打字机效果
+// 页面加载时的打字机效果（仅在桌面设备上启用）
 window.addEventListener('load', function() {
-    const heroTitle = document.querySelector('.hero-title .gradient-text');
-    if (heroTitle) {
-        const originalText = heroTitle.innerText;
-        typeWriter(heroTitle, originalText, 150);
+    if (window.innerWidth >= 768) {
+        const heroTitle = document.querySelector('.hero-title .gradient-text');
+        if (heroTitle) {
+            const originalText = heroTitle.innerText;
+            typeWriter(heroTitle, originalText, 100);
+        }
     }
 });
 
@@ -164,43 +168,37 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100);
 });
 
-// 功能卡片悬停效果
-document.querySelectorAll('.feature-card').forEach(card => {
-    card.addEventListener('mousemove', function(e) {
-        const rect = this.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+// 功能卡片悬停效果（仅在桌面设备上启用3D效果）
+if (window.innerWidth >= 1024) {
+    document.querySelectorAll('.feature-card').forEach(card => {
+        card.addEventListener('mousemove', throttle(function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
 
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
 
-        const rotateX = (y - centerY) / 20;
-        const rotateY = (centerX - x) / 20;
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
 
-        this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+            this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+        }, 50));
+
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+        });
     });
+}
 
-    card.addEventListener('mouseleave', function() {
-        this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
-    });
-});
-
-// 添加粒子背景效果
+// 添加粒子背景效果（仅在非移动设备上启用以提升性能）
 function createParticle() {
+    if (window.innerWidth < 768) return; // 移动设备不显示粒子
+    
     const particle = document.createElement('div');
-    particle.style.position = 'fixed';
-    particle.style.width = '4px';
-    particle.style.height = '4px';
-    particle.style.background = 'rgba(255, 255, 255, 0.5)';
-    particle.style.borderRadius = '50%';
-    particle.style.pointerEvents = 'none';
-    particle.style.zIndex = '1';
-
-    const startX = Math.random() * window.innerWidth;
-    const startY = window.innerHeight + 10;
-
-    particle.style.left = startX + 'px';
-    particle.style.top = startY + 'px';
+    particle.className = 'particle';
+    particle.style.left = Math.random() * window.innerWidth + 'px';
+    particle.style.top = window.innerHeight + 10 + 'px';
 
     document.body.appendChild(particle);
 
@@ -208,27 +206,19 @@ function createParticle() {
     const horizontalMovement = (Math.random() - 0.5) * 100;
 
     particle.animate([
-        {
-            transform: `translate(0, 0) scale(0)`,
-            opacity: 0
-        },
-        {
-            transform: `translate(0, -20px) scale(1)`,
-            opacity: 1,
-            offset: 0.1
-        },
-        {
-            transform: `translate(${horizontalMovement}px, -${window.innerHeight + 20}px) scale(0)`,
-            opacity: 0
-        }
+        { transform: `translate(0, 0) scale(0)`, opacity: 0 },
+        { transform: `translate(0, -20px) scale(1)`, opacity: 1, offset: 0.1 },
+        { transform: `translate(${horizontalMovement}px, -${window.innerHeight + 20}px) scale(0)`, opacity: 0 }
     ], {
         duration: duration,
         easing: 'ease-out'
     }).onfinish = () => particle.remove();
 }
 
-// 定期创建粒子
-setInterval(createParticle, 300);
+// 定期创建粒子（降低频率以提升性能）
+if (window.innerWidth >= 768) {
+    setInterval(createParticle, 500);
+}
 
 // 添加主题切换功能
 let isDarkMode = false;
